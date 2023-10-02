@@ -2,10 +2,7 @@ package com.imd.web.swaptales.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import com.imd.web.swaptales.model.Review;
 import com.imd.web.swaptales.model.Account;
 import com.imd.web.swaptales.repository.ReviewRepository;
@@ -19,6 +16,10 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
+    public Review create(Review review) {
+        return reviewRepository.save(review);
+    }
+    
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
     }
