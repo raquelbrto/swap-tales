@@ -3,7 +3,7 @@ package com.imd.web.swaptales.model;
 import java.util.Date;
 import java.util.Objects;
 
-import com.imd.web.swaptales.enums.Condition;
+import com.imd.web.swaptales.enums.ConditionBook;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +31,7 @@ public class Book {
 	@Column(name = "publishing_year")
 	private Date publishingYear;
 	
-	private Condition condition;
+	private ConditionBook condition;
 	
 	private int edition;
 	

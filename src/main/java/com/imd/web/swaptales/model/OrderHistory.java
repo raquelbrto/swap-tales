@@ -1,5 +1,8 @@
 package com.imd.web.swaptales.model;
 
-public class OrderHistory {
+import com.imd.web.swaptales.enums.StatusRental;
 
+public class OrderHistory extends TransactionHistory{
+
+	private StatusRental status;
 }
