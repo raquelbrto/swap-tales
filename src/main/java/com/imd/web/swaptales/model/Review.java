@@ -28,7 +28,7 @@ public class Review {
 
 	    @ManyToOne
 	    @JoinColumn(name = "user_id")
-	    private User user; 
+	    private Account user; 
 	    
 	    @ManyToOne
 	    @JoinColumn(name = "book_id")

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.imd.web.swaptales.model.Review;
-import com.imd.web.swaptales.model.User;
+import com.imd.web.swaptales.model.Account;
 import com.imd.web.swaptales.repository.ReviewRepository;
 
 @Service
@@ -23,7 +23,7 @@ public class ReviewService {
         return reviewRepository.findAll();
     }
 
-    public List<Review> getReviewsByUser(User user) {
+    public List<Review> getReviewsByUser(Account user) {
         return reviewRepository.findByUser(user);
     }
     

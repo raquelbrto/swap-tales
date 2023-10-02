@@ -14,7 +14,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class User {
+public class Account {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,7 +54,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Account other = (Account) obj;
 		return Objects.equals(telephone, other.telephone) && Objects.equals(cpf, other.cpf)
 				&& Objects.equals(email, other.email) && Objects.equals(id, other.id)
 				&& Objects.equals(name, other.name) && Objects.equals(nickName, other.nickName)
