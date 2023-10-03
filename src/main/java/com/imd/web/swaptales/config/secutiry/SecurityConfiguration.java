@@ -30,8 +30,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/users/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                        .anyRequest().authenticated()
-                        //.anyRequest().permitAll()
+                        //.anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
