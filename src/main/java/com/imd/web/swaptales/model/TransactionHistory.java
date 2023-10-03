@@ -2,27 +2,29 @@ package com.imd.web.swaptales.model;
 
 import java.util.Date;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-public abstract class TransactionHistory {
+
+@MappedSuperclass
+@EntityListeners({AuditingEntityListener.class})
+public abstract class TransactionHistory extends AbstractEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
+	@Column
 	private double price;
 	
 	@ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Account account;
+    @JoinColumn(name = "user_id")
+    private User user;
 	
 	@ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
-	
-	private Date date_transaction;
+
+	@Column
+	private Date dateTransaction;
 }

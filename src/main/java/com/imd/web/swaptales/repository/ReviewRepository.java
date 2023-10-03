@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.imd.web.swaptales.model.Review;
-import com.imd.web.swaptales.model.Account;
+import com.imd.web.swaptales.model.User;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long>{
-	List<Review> findByUser(Account user);
+	List<Review> findByUser(User user);
 }

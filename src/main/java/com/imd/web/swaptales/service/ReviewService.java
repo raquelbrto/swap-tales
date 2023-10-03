@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.imd.web.swaptales.model.Review;
-import com.imd.web.swaptales.model.Account;
+import com.imd.web.swaptales.model.User;
 import com.imd.web.swaptales.repository.ReviewRepository;
 
 @Service
@@ -24,7 +24,7 @@ public class ReviewService {
         return reviewRepository.findAll();
     }
 
-    public List<Review> getReviewsByUser(Account user) {
+    public List<Review> getReviewsByUser(User user) {
         return reviewRepository.findByUser(user);
     }
     
