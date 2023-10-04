@@ -3,6 +3,7 @@ package com.imd.web.swaptales.model;
 import java.util.Date;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.imd.web.swaptales.enums.ConditionBook;
 
 import jakarta.persistence.*;
@@ -14,26 +15,27 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Book extends AbstractEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(length = 200, nullable = false)
+	@Column(length = 200)
 	private String title;
 	
-	@Column(length = 200, nullable = false)
+	@Column(length = 200)
 	private String author;
 	
-	@Column(name = "publishing_year")
-	private Date publishingYear;
+	@Column
+	private Integer publishingYear;
 
 	@Enumerated(EnumType.STRING)
 	private ConditionBook conditionBook;
 
 	@Column
-	private int edition;
+	private Integer edition;
 
 	@Column
 	private String description;
@@ -42,7 +44,7 @@ public class Book extends AbstractEntity{
     @JoinColumn(name = "user_id")
     private User ownerUser;
 	
-	@Column(name= "publishing_company", length = 200)
+	@Column(length = 200)
 	private String publishingCompany;
 
 	@Override
