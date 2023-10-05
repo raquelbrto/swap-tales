@@ -41,6 +41,9 @@ public class Book extends AbstractEntity{
 	@Column
 	private String description;
 	
+	@Column
+	private String url_img;
+	
 	@ManyToOne
     @JoinColumn(name = "user_id")
     private User ownerUser;
