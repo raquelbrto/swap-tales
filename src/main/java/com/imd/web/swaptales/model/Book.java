@@ -1,6 +1,7 @@
 package com.imd.web.swaptales.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -47,6 +48,9 @@ public class Book extends AbstractEntity{
 	@Column(length = 200)
 	private String publishingCompany;
 
+	@OneToMany(mappedBy = "book")
+    private List<Review> reviews;
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(author, conditionBook, description, edition, id, publishingCompany, publishingYear, title);
