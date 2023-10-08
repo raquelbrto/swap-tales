@@ -7,28 +7,14 @@ import com.imd.web.swaptales.model.Review;
 import com.imd.web.swaptales.model.User;
 import com.imd.web.swaptales.repository.ReviewRepository;
 
-@Service
-public class ReviewService {
+public interface ReviewService {
 
-	private final ReviewRepository reviewRepository;
-
-    public ReviewService(ReviewRepository reviewRepository) {
-        this.reviewRepository = reviewRepository;
-    }
-
-    public Review create(Review review) {
-        return reviewRepository.save(review);
-    }
+    public Review create(Review review);
     
-    public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
-    }
-
-    public List<Review> getReviewsByUser(User user) {
-        return reviewRepository.findByUser(user);
-    }
+    public List<Review> getAllReviews();
     
-    public Optional<Review> getReviewsById(Long id) {
-        return reviewRepository.findById(id);
-    }
+
+     List<Review> getReviewsByUser(User user);
+    
+    public Optional<Review> getReviewsById(Long id);
 }
