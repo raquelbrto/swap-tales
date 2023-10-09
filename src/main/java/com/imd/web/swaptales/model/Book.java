@@ -44,6 +44,9 @@ public class Book extends AbstractEntity{
 	@Column
 	private String url_img;
 	
+	@Column
+	private String idioma;
+	
 	@ManyToOne
     @JoinColumn(name = "user_id")
     private User ownerUser;
@@ -53,10 +56,11 @@ public class Book extends AbstractEntity{
 
 	@OneToMany(mappedBy = "book")
     private List<Review> reviews;
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(author, conditionBook, description, edition, id, publishingCompany, publishingYear, title);
+		return Objects.hash(author, conditionBook, description, edition, id, idioma, ownerUser, publishingCompany,
+				publishingYear, reviews, title, url_img);
 	}
 
 	@Override
@@ -69,8 +73,11 @@ public class Book extends AbstractEntity{
 			return false;
 		Book other = (Book) obj;
 		return Objects.equals(author, other.author) && conditionBook == other.conditionBook
-				&& Objects.equals(description, other.description) && edition == other.edition
-				&& Objects.equals(id, other.id) && Objects.equals(publishingCompany, other.publishingCompany)
-				&& Objects.equals(publishingYear, other.publishingYear) && Objects.equals(title, other.title);
-	}
+				&& Objects.equals(description, other.description) && Objects.equals(edition, other.edition)
+				&& Objects.equals(id, other.id) && Objects.equals(idioma, other.idioma)
+				&& Objects.equals(ownerUser, other.ownerUser)
+				&& Objects.equals(publishingCompany, other.publishingCompany)
+				&& Objects.equals(publishingYear, other.publishingYear) && Objects.equals(reviews, other.reviews)
+				&& Objects.equals(title, other.title) && Objects.equals(url_img, other.url_img);
+	}	
 }
