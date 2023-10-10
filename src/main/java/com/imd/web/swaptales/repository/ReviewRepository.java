@@ -13,6 +13,6 @@ import com.imd.web.swaptales.model.User;
 public interface ReviewRepository extends JpaRepository<Review, Long>{
 	List<Review> findByUser(User user);
 	
-	@Query("SELECT r FROM Review r ORDER BY r.likes DESC")
-	List<Review> getAllReviewsOrderedByLikes();
+	//@Query("SELECT r FROM Review r ORDER BY r.likes DESC")
+	//List<Review> getAllReviewsOrderedByLikes();
 }
