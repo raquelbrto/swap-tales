@@ -35,11 +35,11 @@ public class UserServiceImpl implements UserService {
         Optional userOptional = userRepository.findById(user.getId());
         if(userOptional.isPresent()){
             User userBD = (User) userOptional.get();
-            if(user.getTelephone() != null){
+            if(user.getTelephone() != null && user.getTelephone() != ""){
                 userBD.setTelephone(user.getTelephone());
             }
 
-            if(user.getName() != null){
+            if(user.getName() != null && user.getName() != ""){
                 userBD.setName(user.getName());
             }
 
