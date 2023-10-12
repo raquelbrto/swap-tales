@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.imd.web.swaptales.dto.ReviewDTO;
 import com.imd.web.swaptales.model.Book;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +37,14 @@ public class ReviewRestController {
 	}
 
 	@GetMapping(value = "/list")
-    public List<Review> getAllReviews() {
-        return reviewService.getAllReviews();
+    public ResponseEntity<List<Review>> getAllReviews() {
+		try{
+			List<Review> reviews = reviewService.getAllReviews();
+			return ResponseEntity.ok(reviews);
+		}catch(Exception ex) {
+			return ResponseEntity.notFound().build();
+		}
+
     }
 
 	@GetMapping("/{id}")
@@ -47,5 +55,15 @@ public class ReviewRestController {
 		}catch(Exception ex) {
 			return ResponseEntity.notFound().build();
 		}
-	}	
+	}
+
+	@GetMapping("/user/{id}")
+	public ResponseEntity<List<ReviewDTO>> findByUserId(@PathVariable("id")  Long user_id) {
+		try{
+			List<ReviewDTO>  reviews = reviewService.findByUserId(user_id);
+			return ResponseEntity.ok(reviews);
+		}catch(Exception ex) {
+			return ResponseEntity.notFound().build();
+		}
+	}
 }

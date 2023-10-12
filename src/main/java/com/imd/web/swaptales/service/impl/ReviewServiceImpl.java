@@ -2,7 +2,9 @@ package com.imd.web.swaptales.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.imd.web.swaptales.dto.ReviewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +30,14 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public List<Review> getReviewsByUser(User user) {
-        return reviewRepository.findByUser(user);
+    public List<ReviewDTO> findByUserId(Long user_id) {
+
+        return  reviewRepository.findByUserId(user_id)
+                .stream()
+                .map(review -> new ReviewDTO(review.getId(), review.getStars(), review.getLikes_count(),review.getText(),review.getReviewDate(), review.getAuthor_review().getId(), review.getBook().getId()))
+                .collect(Collectors.toList());
     }
-    
+
     @Override
     public Review getReviewsById(Long id) {
         Review review = reviewRepository.getById(id);

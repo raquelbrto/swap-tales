@@ -1,6 +1,8 @@
 package com.imd.web.swaptales.dto;
 
+import com.imd.web.swaptales.model.Book;
 import com.imd.web.swaptales.model.Review;
+import com.imd.web.swaptales.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +16,7 @@ public class ReviewDTO{
     private int likes_count;
     private String text;
     private String reviewDate;
-    private Long user;
+    private Long author_review;
     private Long book;
 
 
@@ -24,7 +26,7 @@ public class ReviewDTO{
         this.likes_count = review.getLikes_count();
         this.text = review.getText();
         this.reviewDate = review.getReviewDate();
-        this.user = review.getUser().getId();
-        this.book = review.getBook().getId();
+        this.author_review = review.getAuthor_review().getId();
+        this.book = review.getBook().getId();;
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,7 +47,7 @@ public class User extends AbstractEntity implements UserDetails {
 	@JsonIgnore
 	private String password;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "author_review")
 	private List<Review> reviews = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.EAGER)
