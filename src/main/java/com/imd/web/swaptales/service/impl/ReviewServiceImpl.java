@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.imd.web.swaptales.dto.ReviewDTO;
+import com.imd.web.swaptales.util.exception.NotFoundException;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +44,23 @@ public class ReviewServiceImpl implements ReviewService{
     public Review getReviewsById(Long id) {
         Review review = reviewRepository.getById(id);
         return review;
+    }
+
+    @Override
+    public void delete(@NotNull Long id) {
+        reviewRepository.delete(reviewRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(id)));
+    }
+
+    @Override
+    public Review update(Long id, ReviewDTO reviewDTO) {
+        return reviewRepository.findById(id)
+                .map(reviewUp ->{
+                    reviewUp.setStars(reviewDTO.getStars());
+                    reviewUp.setLikes_count(reviewDTO.getLikes_count());
+                    reviewUp.setText(reviewDTO.getText());
+                    return reviewRepository.save(reviewUp);
+                })
+                .orElseThrow(() -> new NotFoundException(id));
     }
 }
