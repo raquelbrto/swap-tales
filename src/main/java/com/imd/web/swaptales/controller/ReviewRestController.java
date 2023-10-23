@@ -11,7 +11,7 @@ import com.imd.web.swaptales.model.Review;
 import com.imd.web.swaptales.service.ReviewService;
 
 @RestController
-@RequestMapping("/api/review")
+@RequestMapping("/api/reviews")
 public class ReviewRestController {
 
 	private final ReviewService reviewService;	
@@ -21,13 +21,12 @@ public class ReviewRestController {
 		this.reviewService = reviewService;
 	}
 
-	@PostMapping(value = "/new")
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public Review create(@RequestBody Review review) {
-		return reviewService.create(review);
+	@PostMapping
+	public ResponseEntity<Review> create(@RequestBody Review review) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.create(review));
 	}
 
-	@GetMapping(value = "/list")
+	@GetMapping
     public ResponseEntity<List<Review>> getAllReviews() {
 		try{
 			List<Review> reviews = reviewService.getAllReviews();
@@ -35,7 +34,6 @@ public class ReviewRestController {
 		}catch(Exception ex) {
 			return ResponseEntity.notFound().build();
 		}
-
     }
 
 	@GetMapping("/{id}")
@@ -51,7 +49,7 @@ public class ReviewRestController {
 	@GetMapping("/user/{id}")
 	public ResponseEntity<List<ReviewDTO>> findByUserId(@PathVariable("id")  Long user_id) {
 		try{
-			List<ReviewDTO>  reviews = reviewService.findByUserId(user_id);
+			List<ReviewDTO> reviews = reviewService.findByUserId(user_id);
 			return ResponseEntity.ok(reviews);
 		}catch(Exception e) {
 			return ResponseEntity.notFound().build();
