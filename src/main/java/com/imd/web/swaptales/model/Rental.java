@@ -23,4 +23,18 @@ public class Rental extends TransactionHistory{
 
 	@Column
 	private Date dateRental;
+
+	@ManyToOne
+	@JoinColumn(name = "book_id")
+	private Book book;
+
+	@ManyToOne
+	@JoinColumn(name = "user_owner_id")
+	private User bookOwner;
+
+	@ManyToOne
+	@JoinColumn(name = "user_borrower_id")
+	private User borrower;
+
+
 }

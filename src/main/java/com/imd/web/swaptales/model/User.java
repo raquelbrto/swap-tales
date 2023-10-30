@@ -27,28 +27,40 @@ public class User extends AbstractEntity implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(length = 200, nullable = false)
 	private String name;
-	
+
 	@Column
 	private String cpf;
-	
+
 	@Column(length = 200, nullable = false)
 	private String email;
-	
+
 	@Column
 	private String telephone;
-	
+
 	@Column(length = 200, nullable = false)
 	private String username;
-	
+
 	@Column
 	@JsonIgnore
 	private String password;
 
 	@OneToMany(mappedBy = "author_review")
 	private List<Review> reviews = new ArrayList<>();
+
+	@ManyToMany
+	@JoinTable(
+			name = "user_follower",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "follower_id")
+	)
+	private List<User> followers = new ArrayList<>();
+
+	@ManyToMany(mappedBy = "followers")
+	private List<User> following = new ArrayList<>();
+
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable( name = "permission",

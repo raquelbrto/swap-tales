@@ -45,7 +45,7 @@ public class Book extends AbstractEntity{
 	private String description;
 	
 	@Column
-	private String url_img;
+	private String urlImg;
 	
 	@Column
 	private String idioma;
@@ -63,7 +63,7 @@ public class Book extends AbstractEntity{
 	@Override
 	public int hashCode() {
 		return Objects.hash(author, conditionBook, description, edition, id, idioma, ownerUser, publishingCompany,
-				publishingYear, reviews, title, url_img);
+				publishingYear, reviews, title, urlImg);
 	}
 
 	@Override
@@ -81,6 +81,6 @@ public class Book extends AbstractEntity{
 				&& Objects.equals(ownerUser, other.ownerUser)
 				&& Objects.equals(publishingCompany, other.publishingCompany)
 				&& Objects.equals(publishingYear, other.publishingYear) && Objects.equals(reviews, other.reviews)
-				&& Objects.equals(title, other.title) && Objects.equals(url_img, other.url_img);
+				&& Objects.equals(title, other.title) && Objects.equals(urlImg, other.urlImg);
 	}	
 }
