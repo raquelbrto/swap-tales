@@ -69,6 +69,14 @@ public class User extends AbstractEntity implements UserDetails {
 	)
 	private List<Review> likedReviews;
 
+	@ManyToMany
+	@JoinTable(
+			name = "user_book_favorite",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "book_id")
+	)
+	private List<Book> favoriteBooks;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable( name = "permission",
 			joinColumns = {@JoinColumn(
