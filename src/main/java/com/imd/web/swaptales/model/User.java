@@ -61,6 +61,13 @@ public class User extends AbstractEntity implements UserDetails {
 	@ManyToMany(mappedBy = "followers")
 	private List<User> following = new ArrayList<>();
 
+	@ManyToMany
+	@JoinTable(
+			name = "user_review_like",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "review_id")
+	)
+	private List<Review> likedReviews;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable( name = "permission",
