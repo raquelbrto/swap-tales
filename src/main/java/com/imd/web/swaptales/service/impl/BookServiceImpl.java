@@ -1,5 +1,8 @@
 package com.imd.web.swaptales.service.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import com.imd.web.swaptales.enums.AvailabilityStatus;
 import com.imd.web.swaptales.model.Book;
 import com.imd.web.swaptales.repository.BookRepository;
 import com.imd.web.swaptales.repository.UserRepository;
@@ -7,8 +10,15 @@ import com.imd.web.swaptales.service.BookService;
 import com.imd.web.swaptales.util.exception.BusinessRuleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -22,6 +32,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book register(Book book) throws BusinessRuleException {
         this.validation(book);
+
         return bookRepository.save(book);
     }
 
@@ -108,5 +119,20 @@ public class BookServiceImpl implements BookService {
         }else{
             throw new BusinessRuleException("Erro: Não pode existir um livro sem um dono!");
         }
+    }
+
+    @Override
+    public List<Book> getAllBocksToLoan() {
+        return bookRepository.findByAvailabilityStatus(AvailabilityStatus.FOR_LOAN);
+    }
+
+    @Override
+    public List<Book> getAllBocksToSale() {
+        return bookRepository.findByAvailabilityStatus(AvailabilityStatus.FOR_SALE);
+    }
+
+    @Override
+    public List<Book> getAllBoocksToTrade() {
+        return bookRepository.findByAvailabilityStatus(AvailabilityStatus.FOR_TRADE);
     }
 }

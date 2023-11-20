@@ -1,5 +1,6 @@
 package com.imd.web.swaptales.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -7,6 +8,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.imd.web.swaptales.enums.AvailabilityStatus;
 import com.imd.web.swaptales.enums.ConditionBook;
 
 import jakarta.persistence.*;
@@ -26,7 +28,7 @@ public class Book extends AbstractEntity{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(length = 200)
+	@Column(length = 200, nullable = false)
 	private String title;
 	
 	@Column(length = 200)
@@ -60,10 +62,18 @@ public class Book extends AbstractEntity{
 	@OneToMany(mappedBy = "book")
     private List<Review> reviews;
 
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private AvailabilityStatus availabilityStatus;
+
+	@Column
+	private Double price;
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(author, conditionBook, description, edition, id, idioma, ownerUser, publishingCompany,
-				publishingYear, reviews, title, urlImg);
+				publishingYear, reviews, title, urlImg, availabilityStatus, price);
 	}
 
 	@Override
@@ -81,6 +91,7 @@ public class Book extends AbstractEntity{
 				&& Objects.equals(ownerUser, other.ownerUser)
 				&& Objects.equals(publishingCompany, other.publishingCompany)
 				&& Objects.equals(publishingYear, other.publishingYear) && Objects.equals(reviews, other.reviews)
-				&& Objects.equals(title, other.title) && Objects.equals(urlImg, other.urlImg);
+				&& Objects.equals(title, other.title) && Objects.equals(urlImg, other.urlImg)
+				&& Objects.equals(availabilityStatus, other.availabilityStatus) && Objects.equals(price, other.price);
 	}	
 }

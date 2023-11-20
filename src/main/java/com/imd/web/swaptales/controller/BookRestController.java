@@ -76,4 +76,34 @@ public class BookRestController {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
+
+    @GetMapping("/books-to-trade")
+    public ResponseEntity<?> getAllBooksToTrade(){
+        try{
+            List<Book> books = bookService.getAllBoocksToTrade();
+            return ResponseEntity.ok(books);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/books-to-sale")
+    public ResponseEntity<?> getAllBooksToSale(){
+        try{
+            List<Book> books = bookService.getAllBocksToSale();
+            return ResponseEntity.ok(books);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/books-to-loan")
+    public ResponseEntity<?> getAllBooksToLoan(){
+        try{
+            List<Book> books = bookService.getAllBocksToLoan();
+            return ResponseEntity.ok(books);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
 }

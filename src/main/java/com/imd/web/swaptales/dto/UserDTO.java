@@ -20,6 +20,7 @@ public class UserDTO {
     private String telephone;
     private String username;
     private String password;
+    private String urlImg;
     private List<Role> permissions = new ArrayList();
 
     public User getEntity(){
@@ -32,6 +33,7 @@ public class UserDTO {
         user.setUsername(username);
         user.setPassword(password);
         user.setPermissions(permissions);
+        user.setUrlImg(urlImg);
 
         return user;
     }

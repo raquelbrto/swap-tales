@@ -1,11 +1,13 @@
 package com.imd.web.swaptales.dto;
 
+import com.imd.web.swaptales.enums.AvailabilityStatus;
 import com.imd.web.swaptales.enums.ConditionBook;
 import com.imd.web.swaptales.model.Book;
 import com.imd.web.swaptales.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -22,6 +24,9 @@ public class BookDTO {
     private String description;
     private Long ownerUserId;
     private String publishingCompany;
+    private AvailabilityStatus availabilityStatus;
+    private Double price;
+    private String urlImg;
 
     public Book getEntity(){
         Book book = new Book();
@@ -36,6 +41,9 @@ public class BookDTO {
         user.setId(this.ownerUserId);
         book.setOwnerUser(user);
         book.setPublishingCompany(this.publishingCompany);
+        book.setAvailabilityStatus(this.availabilityStatus);
+        book.setPrice(this.price);
+        book.setUrlImg(this.urlImg);
 
         return book;
     }

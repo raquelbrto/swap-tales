@@ -9,40 +9,23 @@ import org.springframework.security.core.GrantedAuthority;
 import java.io.Serial;
 import java.util.Objects;
 
-@Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Role extends AbstractEntity implements GrantedAuthority {
+public enum Role implements GrantedAuthority{
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+    ADMIN("Administrador"),
+    USER("Usuario");
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private final String description;
 
-    @Column
-    private String code;
-
-    @Column
-    private String description;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
-        return Objects.equals(id, role.id);
+    Role(String description) {
+        this.description = description;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public String getDescription() {
+        return description;
     }
 
     @Override
     public String getAuthority() {
-        return this.code;
+        return name();
     }
 }

@@ -47,6 +47,9 @@ public class User extends AbstractEntity implements UserDetails {
 	@JsonIgnore
 	private String password;
 
+	@Column
+	private String urlImg;
+
 	@OneToMany(mappedBy = "author_review")
 	private List<Review> reviews = new ArrayList<>();
 
@@ -77,19 +80,15 @@ public class User extends AbstractEntity implements UserDetails {
 	)
 	private List<Book> favoriteBooks;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable( name = "permission",
-			joinColumns = {@JoinColumn(
-					name = "user_id"
-			)},
-			inverseJoinColumns = {@JoinColumn(
-					name = "role_id"
-			)})
+	@ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+	@CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "user_id"))
+	@Enumerated(EnumType.STRING)
+	@Column(name = "permissions")
 	private List<Role> permissions = new ArrayList();
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(telephone, cpf, email, id, name, username, password);
+		return Objects.hash(telephone, cpf, email, id, name, username, password, urlImg);
 	}
 
 	@Override
@@ -104,7 +103,7 @@ public class User extends AbstractEntity implements UserDetails {
 		return Objects.equals(telephone, other.telephone) && Objects.equals(cpf, other.cpf)
 				&& Objects.equals(email, other.email) && Objects.equals(id, other.id)
 				&& Objects.equals(name, other.name) && Objects.equals(username, other.username)
-				&& Objects.equals(password, other.password);
+				&& Objects.equals(password, other.password) && Objects.equals(urlImg, other.urlImg);
 	}
 
 
