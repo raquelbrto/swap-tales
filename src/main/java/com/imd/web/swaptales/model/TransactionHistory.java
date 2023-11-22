@@ -1,5 +1,6 @@
 package com.imd.web.swaptales.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.*;
@@ -20,9 +21,6 @@ public abstract class TransactionHistory extends AbstractEntity{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column
-	private Double price;
-
 	@ManyToOne
 	@JoinColumn(name = "user_id")
     private User user;
@@ -32,5 +30,5 @@ public abstract class TransactionHistory extends AbstractEntity{
     private Book book;
 
 	@Column
-	private Date dateTransaction;
+	private LocalDate dateTransaction;
 }

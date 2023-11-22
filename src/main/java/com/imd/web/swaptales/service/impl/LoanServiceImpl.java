@@ -7,6 +7,7 @@ import com.imd.web.swaptales.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +50,7 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public Loan finishLoan(Loan loan) {
-        loan.setDateReturn(new Date());
+        loan.setDateReturn(LocalDate.now());
         if(loan.getDateReturn().compareTo(loan.getExpectedReturnDate()) > 0){
             loan.setStatus(StatusLoan.ATRASO);
         }else{

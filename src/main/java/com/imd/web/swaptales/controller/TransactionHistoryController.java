@@ -1,16 +1,14 @@
 package com.imd.web.swaptales.controller;
 
 import com.imd.web.swaptales.dto.LoanDTO;
-import com.imd.web.swaptales.model.Book;
+import com.imd.web.swaptales.dto.ExchangeDTO;
+import com.imd.web.swaptales.model.Exchange;
 import com.imd.web.swaptales.model.Loan;
+import com.imd.web.swaptales.service.ExchangeService;
 import com.imd.web.swaptales.service.LoanService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,8 +19,11 @@ public class TransactionHistoryController {
     @Autowired
     private LoanService loanService;
 
+    @Autowired
+    private ExchangeService exchangeService;
+
     @PostMapping("/loan")
-    public ResponseEntity<?> createLoan(LoanDTO loanDTO){
+    public ResponseEntity<?> createLoan(@RequestBody LoanDTO loanDTO){
         try{
             Loan loan = loanService.createLoan(loanDTO.getEntity());
             return ResponseEntity.ok(loan);
@@ -32,7 +33,7 @@ public class TransactionHistoryController {
     }
 
     @GetMapping("/loan/all-borrowed/{idUser}")
-    public ResponseEntity<?> getAllBorrowedByIdUser(@PathParam("idUser") Long idUser){
+    public ResponseEntity<?> getAllBorrowedByIdUser(@PathVariable("idUser") Long idUser){
         try{
             List<Loan> result = loanService.findAllBorrowedByIdUser(idUser);
             return ResponseEntity.ok(result);
@@ -42,9 +43,29 @@ public class TransactionHistoryController {
     }
 
     @GetMapping("/loan/all-loaned/{idUser}")
-    public ResponseEntity<?> getAllLoanedByIdUser(@PathParam("idUser") Long idUser){
+    public ResponseEntity<?> getAllLoanedByIdUser(@PathVariable("idUser") Long idUser){
         try{
             List<Loan> result = loanService.findAllLoanedByIdUser(idUser);
+            return ResponseEntity.ok(result);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/exchange")
+    public ResponseEntity<?> createExchange(@RequestBody ExchangeDTO exchangeDTO){
+        try{
+            Exchange exchange = exchangeService.createExchange(exchangeDTO.getEntity());
+            return ResponseEntity.ok(exchange);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/exchange/user/{idUser}")
+    public ResponseEntity<?> getAllExchangesByIdUser(@PathVariable("idUser") Long idUser){
+        try{
+            List<Exchange> result = exchangeService.getAllExchangesByIdUser(idUser);
             return ResponseEntity.ok(result);
         }catch(Exception ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
