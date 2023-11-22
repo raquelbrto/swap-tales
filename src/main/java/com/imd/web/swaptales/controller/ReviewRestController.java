@@ -37,19 +37,19 @@ public class ReviewRestController {
     }
 
 	@GetMapping("/{id}")
-		public ResponseEntity<ReviewDTO> getReviewsById(@PathVariable Long id) {
+		public ResponseEntity<Review>getReviewsById(@PathVariable Long id) {
 		try{
 			Review review = reviewService.getReviewsById(id);
-			return ResponseEntity.ok(new ReviewDTO(review));
+			return ResponseEntity.ok(review);
 		}catch(Exception e) {
 			return ResponseEntity.notFound().build();
 		}
 	}
 
 	@GetMapping("/user/{id}")
-	public ResponseEntity<List<ReviewDTO>> findByUserId(@PathVariable("id")  Long user_id) {
+	public ResponseEntity<List<Review>>  findByUserId(@PathVariable("id")  Long user_id) {
 		try{
-			List<ReviewDTO> reviews = reviewService.findByUserId(user_id);
+			List<Review> reviews = reviewService.findByUserId(user_id);
 			return ResponseEntity.ok(reviews);
 		}catch(Exception e) {
 			return ResponseEntity.notFound().build();

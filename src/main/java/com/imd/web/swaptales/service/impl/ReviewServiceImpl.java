@@ -32,12 +32,9 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public List<ReviewDTO> findByUserId(Long user_id) {
+    public List<Review> findByUserId(Long user_id) {
 
-        return  reviewRepository.findByUserId(user_id)
-                .stream()
-                .map(review -> new ReviewDTO(review.getId(), review.getStars(), review.getLikes_count(),review.getText(),review.getReviewDate(), review.getAuthor_review().getId(), review.getBook().getId()))
-                .collect(Collectors.toList());
+        return  reviewRepository.findByUserId(user_id);
     }
 
     @Override

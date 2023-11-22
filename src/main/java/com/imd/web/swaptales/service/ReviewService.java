@@ -14,7 +14,7 @@ public interface ReviewService {
      List<Review> getAllReviews();
 
 
-    List<ReviewDTO> findByUserId(Long user_id);
+    List<Review> findByUserId(Long user_id);
     
      Review getReviewsById(Long id);
 
