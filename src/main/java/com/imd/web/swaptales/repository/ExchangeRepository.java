@@ -1,6 +1,5 @@
 package com.imd.web.swaptales.repository;
 
-import com.imd.web.swaptales.model.Loan;
 import com.imd.web.swaptales.model.Exchange;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

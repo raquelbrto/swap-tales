@@ -2,10 +2,13 @@ package com.imd.web.swaptales.controller;
 
 import com.imd.web.swaptales.dto.LoanDTO;
 import com.imd.web.swaptales.dto.ExchangeDTO;
+import com.imd.web.swaptales.dto.SaleDTO;
 import com.imd.web.swaptales.model.Exchange;
 import com.imd.web.swaptales.model.Loan;
+import com.imd.web.swaptales.model.Sale;
 import com.imd.web.swaptales.service.ExchangeService;
 import com.imd.web.swaptales.service.LoanService;
+import com.imd.web.swaptales.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,9 @@ public class TransactionHistoryController {
 
     @Autowired
     private ExchangeService exchangeService;
+
+    @Autowired
+    private SaleService saleService;
 
     @PostMapping("/loan")
     public ResponseEntity<?> createLoan(@RequestBody LoanDTO loanDTO){
@@ -66,6 +72,36 @@ public class TransactionHistoryController {
     public ResponseEntity<?> getAllExchangesByIdUser(@PathVariable("idUser") Long idUser){
         try{
             List<Exchange> result = exchangeService.getAllExchangesByIdUser(idUser);
+            return ResponseEntity.ok(result);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/sale")
+    public ResponseEntity<?> createSale(@RequestBody SaleDTO saleDTO){
+        try{
+            Sale sale = saleService.createSale(saleDTO.getEntity());
+            return ResponseEntity.ok(sale);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/sale/all-sold/{idUser}")
+    public ResponseEntity<?> getAllSoldByIdUser(@PathVariable("idUser") Long idUser){
+        try{
+            List<Sale> result = saleService.findAllSoldByIdUser(idUser);
+            return ResponseEntity.ok(result);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/sale/all-purchased/{idUser}")
+    public ResponseEntity<?> getAllPurchasedByIdUser(@PathVariable("idUser") Long idUser){
+        try{
+            List<Sale> result = saleService.findAllPurchasedByIdUser(idUser);
             return ResponseEntity.ok(result);
         }catch(Exception ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
