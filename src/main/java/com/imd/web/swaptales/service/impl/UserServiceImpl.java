@@ -82,6 +82,23 @@ public class UserServiceImpl implements UserService {
         return userBD;
     }
 
+
+    @Override
+    public User unfollowUser(Long idUser, User user) {
+        User userBD = userRepository.findById(idUser).get();
+        userBD.getFollowers().remove(user);
+        userBD.setCountFollowers((long) userBD.getFollowers().size());
+        userRepository.save(userBD);
+        return userBD;
+    }
+
+    @Override
+    public List<User> getAllFollowers(Long idUser) {
+        User userBD = userRepository.findById(idUser).get();
+         List<User> followers = userBD.getFollowers();
+        return followers;
+    }
+
     @Override
     public List<User> listTopUsers() {
         return userRepository.listTopUsers();

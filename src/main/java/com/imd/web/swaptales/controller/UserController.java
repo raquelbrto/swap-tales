@@ -87,6 +87,23 @@ public class UserController {
         }
     }
 
+    @PutMapping("/followers/{idUser}")
+    public ResponseEntity<?> followers(@PathVariable("idUser") Long idUser){
+        try{
+            return ResponseEntity.ok(userService.getAllFollowers(idUser));
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/unfollow-user/{idUser}")
+    public ResponseEntity<?> unfollowUser(@PathVariable("idUser") Long idUser, @RequestBody UserDTO userDTO){
+        try{
+            return ResponseEntity.ok(userService.unfollowUser(idUser, userDTO.getEntity()));
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id){
         try{
