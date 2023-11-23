@@ -96,4 +96,13 @@ public class UserController {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
+
+    @GetMapping("/top-users")
+    public ResponseEntity<?> getTopUsers(){
+        try{
+            return ResponseEntity.ok(userService.listTopUsers());
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
 }

@@ -17,7 +17,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByAvailabilityStatus(@Param("availabilityStatus")AvailabilityStatus availabilityStatus);
 
     @Query("SELECT b FROM Book b LEFT JOIN FETCH b.reviews r ORDER BY AVG(r.stars) DESC, COUNT(r) DESC, MAX(r.reviewDate) DESC")
-    List<Book> listBestReview();
+    List<Book> listTopBooks();
+
     //Query("SELECT b FROM Book b ORDER BY b.reviews.size DESC")
     //List<Book> findAllOrderedByReviewCount();
 }

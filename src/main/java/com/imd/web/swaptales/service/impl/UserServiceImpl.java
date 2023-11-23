@@ -81,4 +81,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userBD);
         return userBD;
     }
+
+    @Override
+    public List<User> listTopUsers() {
+        return userRepository.listTopUsers();
+    }
 }

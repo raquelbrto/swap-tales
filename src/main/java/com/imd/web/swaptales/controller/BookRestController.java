@@ -106,4 +106,13 @@ public class BookRestController {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
+
+    @GetMapping("/top-books")
+    public ResponseEntity<?> getTopBooks(){
+        try{
+            return ResponseEntity.ok(bookService.listTopBooks());
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
 }

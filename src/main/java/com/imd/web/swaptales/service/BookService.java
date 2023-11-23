@@ -27,4 +27,6 @@ public interface BookService {
     List<Book> getAllBocksToSale();
 
     List<Book> getAllBoocksToTrade();
+
+    List<Book> listTopBooks();
 }

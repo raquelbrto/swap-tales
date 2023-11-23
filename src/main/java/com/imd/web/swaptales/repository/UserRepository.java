@@ -22,5 +22,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "LEFT JOIN FETCH u.likedReviews r " +
             "GROUP BY u " +
             "ORDER BY COUNT(f) DESC, SUM(r.likesCount) DESC, COUNT(r) DESC")
-    List<User> listBestUser();
+    List<User> listTopUsers();
 }

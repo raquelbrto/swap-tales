@@ -135,4 +135,10 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAllBoocksToTrade() {
         return bookRepository.findByAvailabilityStatus(AvailabilityStatus.FOR_TRADE);
     }
+
+    @Override
+    public List<Book> listTopBooks(){
+        return bookRepository.listTopBooks();
+    }
+
 }
