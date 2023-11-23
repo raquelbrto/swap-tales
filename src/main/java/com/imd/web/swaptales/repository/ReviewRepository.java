@@ -12,6 +12,6 @@ import com.imd.web.swaptales.model.User;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long>{
 
-	@Query("SELECT t FROM Review  t WHERE t.author_review.id=?1")
+	@Query("SELECT r FROM Review r WHERE r.authorReview.id=?1")
 	List<Review> findByUserId(Long id);
 }

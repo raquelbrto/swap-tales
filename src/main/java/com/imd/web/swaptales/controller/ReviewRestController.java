@@ -22,12 +22,12 @@ public class ReviewRestController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Review> create(@RequestBody Review review) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.create(review));
+	public ResponseEntity<?> create(@RequestBody ReviewDTO reviewDTO) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.create(reviewDTO.getEntity()));
 	}
 
 	@GetMapping
-    public ResponseEntity<List<Review>> getAllReviews() {
+    public ResponseEntity<?> getAllReviews() {
 		try{
 			List<Review> reviews = reviewService.getAllReviews();
 			return ResponseEntity.ok(reviews);
@@ -37,7 +37,7 @@ public class ReviewRestController {
     }
 
 	@GetMapping("/{id}")
-		public ResponseEntity<Review>getReviewsById(@PathVariable Long id) {
+		public ResponseEntity<?>getReviewsById(@PathVariable Long id) {
 		try{
 			Review review = reviewService.getReviewsById(id);
 			return ResponseEntity.ok(review);
@@ -47,9 +47,9 @@ public class ReviewRestController {
 	}
 
 	@GetMapping("/user/{id}")
-	public ResponseEntity<List<Review>>  findByUserId(@PathVariable("id")  Long user_id) {
+	public ResponseEntity<List<Review>>  findByUserId(@PathVariable("id")  Long id) {
 		try{
-			List<Review> reviews = reviewService.findByUserId(user_id);
+			List<Review> reviews = reviewService.findByUserId(id);
 			return ResponseEntity.ok(reviews);
 		}catch(Exception e) {
 			return ResponseEntity.notFound().build();
@@ -57,9 +57,9 @@ public class ReviewRestController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") Long review_id){
+	public ResponseEntity<?> delete(@PathVariable("id") Long id){
 		try {
-			reviewService.delete(review_id);
+			reviewService.delete(id);
 			return ResponseEntity.ok().build();
 		}catch (Exception e) {
 			return  ResponseEntity.badRequest().build();
@@ -67,9 +67,9 @@ public class ReviewRestController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Review> update(@PathVariable("id") Long review_id, ReviewDTO reviewDTO) {
+	public ResponseEntity<?> update(@PathVariable("id") Long id, ReviewDTO reviewDTO) {
 		try {
-			return ResponseEntity.ok(reviewService.update(review_id, reviewDTO));
+			return ResponseEntity.ok(reviewService.update(id, reviewDTO));
 		}catch (Exception e) {
 			return  ResponseEntity.badRequest().build();
 		}

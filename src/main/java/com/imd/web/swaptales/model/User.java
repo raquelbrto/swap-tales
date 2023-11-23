@@ -50,9 +50,6 @@ public class User extends AbstractEntity implements UserDetails {
 	@Column
 	private String urlImg;
 
-	@OneToMany(mappedBy = "author_review")
-	private List<Review> reviews = new ArrayList<>();
-
 	@ManyToMany
 	@JoinTable(
 			name = "user_follower",

@@ -1,8 +1,6 @@
 package com.imd.web.swaptales.service.impl;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.imd.web.swaptales.dto.ReviewDTO;
 import com.imd.web.swaptales.util.exception.NotFoundException;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.imd.web.swaptales.model.Review;
-import com.imd.web.swaptales.model.User;
 import com.imd.web.swaptales.repository.ReviewRepository;
 import com.imd.web.swaptales.service.ReviewService;
 
@@ -54,7 +51,7 @@ public class ReviewServiceImpl implements ReviewService{
         return reviewRepository.findById(id)
                 .map(reviewUp ->{
                     reviewUp.setStars(reviewDTO.getStars());
-                    reviewUp.setLikes_count(reviewDTO.getLikes_count());
+                    reviewUp.setLikesCount(reviewDTO.getLikesCount());
                     reviewUp.setText(reviewDTO.getText());
                     return reviewRepository.save(reviewUp);
                 })

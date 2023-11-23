@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ExchangeServiceImpl implements ExchangeService {
@@ -18,7 +19,15 @@ public class ExchangeServiceImpl implements ExchangeService {
 
     @Override
     public List<Exchange> getAllExchangesByIdUser(Long idUser) {
-        return exchangeRepository.findAllExchangesByIdUser(idUser);
+
+
+        List<Exchange> listBD = exchangeRepository.findAllExchangesByIdUser(idUser);
+
+        List<Exchange> listResult = listBD.stream()
+                .filter(obj-> !(StatusExchange.PENDENTE.equals(obj.getStatus()) || StatusExchange.RECUSADO.equals(obj.getStatus())))
+                .collect(Collectors.toList());
+
+        return listResult;
     }
 
     @Override

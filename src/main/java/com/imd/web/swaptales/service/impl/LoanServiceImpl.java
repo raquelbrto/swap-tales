@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LoanServiceImpl implements LoanService {
@@ -26,12 +27,26 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public List<Loan> findAllBorrowedByIdUser(Long idUser) {
-        return loanRepository.findAllBorrowedByIdUser(idUser);
+
+        List<Loan> listBD = loanRepository.findAllBorrowedByIdUser(idUser);
+
+        List<Loan> listResult = listBD.stream()
+                .filter(obj-> !(StatusLoan.PENDENTE.equals(obj.getStatus()) || StatusLoan.RECUSADO.equals(obj.getStatus())))
+                .collect(Collectors.toList());
+
+        return listResult;
     }
 
     @Override
     public List<Loan> findAllLoanedByIdUser(Long idUser) {
-        return loanRepository.findAllLoanedByIdUser(idUser);
+
+        List<Loan> listBD = loanRepository.findAllLoanedByIdUser(idUser);
+
+        List<Loan> listResult = listBD.stream()
+                .filter(obj-> !(StatusLoan.PENDENTE.equals(obj.getStatus()) || StatusLoan.RECUSADO.equals(obj.getStatus())))
+                .collect(Collectors.toList());
+
+        return listResult;
     }
 
     @Override
