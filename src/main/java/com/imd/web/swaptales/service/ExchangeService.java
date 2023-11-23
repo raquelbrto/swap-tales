@@ -16,4 +16,8 @@ public interface ExchangeService {
     Exchange updateExchange(Exchange exchange);
 
     void deleteExchangeById(Long idExchange);
+
+    List<Exchange> getAllExchangesPendentByIdUser(Long idUser);
+
+    Exchange acceptExchange(Long id);
 }

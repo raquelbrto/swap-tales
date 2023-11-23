@@ -58,6 +58,36 @@ public class TransactionHistoryController {
         }
     }
 
+    @GetMapping("/loan/user-pendent/{idUser}")
+    public ResponseEntity<?> getAllBorrowedPendentsByIdUser(@PathVariable("idUser") Long idUser){
+        try{
+            List<Loan> result = loanService.findAllBorrowedPendentsByIdUser(idUser);
+            return ResponseEntity.ok(result);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PutMapping("/loan/accept/{id}")
+    public ResponseEntity<?> acceptLoan(@PathVariable("id") Long id){
+        try{
+            Loan result = loanService.acceptLoan(id);
+            return ResponseEntity.ok(result);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PutMapping("/loan/finish/{id}")
+    public ResponseEntity<?> finishLoan(@PathVariable("id") Long id){
+        try{
+            Loan result = loanService.finishLoan(id);
+            return ResponseEntity.ok(result);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
     @PostMapping("/exchange")
     public ResponseEntity<?> createExchange(@RequestBody ExchangeDTO exchangeDTO){
         try{
@@ -72,6 +102,25 @@ public class TransactionHistoryController {
     public ResponseEntity<?> getAllExchangesByIdUser(@PathVariable("idUser") Long idUser){
         try{
             List<Exchange> result = exchangeService.getAllExchangesByIdUser(idUser);
+            return ResponseEntity.ok(result);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+    @GetMapping("/exchange/user-pendent/{idUser}")
+    public ResponseEntity<?> getAllExchangesPendentByIdUser(@PathVariable("idUser") Long idUser){
+        try{
+            List<Exchange> result = exchangeService.getAllExchangesPendentByIdUser(idUser);
+            return ResponseEntity.ok(result);
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PutMapping("/exchange/accept/{id}")
+    public ResponseEntity<?> acceptExchange(@PathVariable("id") Long id){
+        try{
+            Exchange result = exchangeService.acceptExchange(id);
             return ResponseEntity.ok(result);
         }catch(Exception ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());

@@ -20,5 +20,9 @@ public interface LoanService {
 
     void deleteLoan(Loan loan);
 
-    Loan finishLoan(Loan loan);
+    Loan finishLoan(Long id);
+
+    List<Loan> findAllBorrowedPendentsByIdUser(Long idUser);
+
+    Loan acceptLoan(Long id);
 }

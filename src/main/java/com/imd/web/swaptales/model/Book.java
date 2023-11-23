@@ -38,12 +38,13 @@ public class Book extends AbstractEntity{
 	private Integer publishingYear;
 
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private ConditionBook conditionBook;
 
 	@Column
 	private Integer edition;
 
-	@Column
+	@Column(length = 1000)
 	private String description;
 	
 	@Column
@@ -68,6 +69,9 @@ public class Book extends AbstractEntity{
 
 	@Column
 	private Double price;
+
+	@Column
+	private Integer countDaysLoan;
 
 
 	@Override

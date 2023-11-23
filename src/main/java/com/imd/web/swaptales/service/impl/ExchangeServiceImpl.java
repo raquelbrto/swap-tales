@@ -1,5 +1,6 @@
 package com.imd.web.swaptales.service.impl;
 
+import com.imd.web.swaptales.enums.StatusExchange;
 import com.imd.web.swaptales.model.Exchange;
 import com.imd.web.swaptales.repository.ExchangeRepository;
 import com.imd.web.swaptales.service.ExchangeService;
@@ -38,5 +39,17 @@ public class ExchangeServiceImpl implements ExchangeService {
     @Override
     public void deleteExchangeById(Long idExchange) {
         exchangeRepository.deleteById(idExchange);
+    }
+
+    @Override
+    public List<Exchange> getAllExchangesPendentByIdUser(Long idUser) {
+        return exchangeRepository.findAllExchangesByIdUserAndByStatus(idUser, StatusExchange.PENDENTE);
+    }
+
+    @Override
+    public Exchange acceptExchange(Long id){
+        Exchange exchange = exchangeRepository.findById(id).get();
+        exchange.setStatus(StatusExchange.ACEITO);
+        return exchangeRepository.save(exchange);
     }
 }

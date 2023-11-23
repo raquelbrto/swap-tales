@@ -2,6 +2,7 @@ package com.imd.web.swaptales.enums;
 
 public enum ConditionBook {
 	NOVO,
-	USADO
-	
+	SEMI_NOVO,
+	USADO,
+	COM_DEFEITO
 }

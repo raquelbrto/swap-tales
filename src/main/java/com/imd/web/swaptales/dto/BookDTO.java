@@ -27,6 +27,7 @@ public class BookDTO {
     private AvailabilityStatus availabilityStatus;
     private Double price;
     private String urlImg;
+    private Integer countDaysLoan;
 
     public Book getEntity(){
         Book book = new Book();
@@ -44,6 +45,7 @@ public class BookDTO {
         book.setAvailabilityStatus(this.availabilityStatus);
         book.setPrice(this.price);
         book.setUrlImg(this.urlImg);
+        book.setCountDaysLoan(this.countDaysLoan);
 
         return book;
     }
