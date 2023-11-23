@@ -17,4 +17,6 @@ public interface UserService {
     List<User> getAllUsers();
 
     User findAccountByEmailAndPassword(String email, String password);
+
+    User followUser(Long idUser, User user);
 }

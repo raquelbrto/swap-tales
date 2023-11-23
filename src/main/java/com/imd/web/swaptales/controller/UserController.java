@@ -78,6 +78,15 @@ public class UserController {
         }
     }
 
+    @PutMapping("/follow-user/{idUser}")
+    public ResponseEntity<?> followUser(@PathVariable("idUser") Long idUser, @RequestBody UserDTO userDTO){
+        try{
+            return ResponseEntity.ok(userService.followUser(idUser, userDTO.getEntity()));
+        }catch(Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id){
         try{

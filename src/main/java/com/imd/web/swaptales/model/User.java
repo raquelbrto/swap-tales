@@ -56,10 +56,8 @@ public class User extends AbstractEntity implements UserDetails {
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "follower_id")
 	)
+	@JsonIgnore
 	private List<User> followers = new ArrayList<>();
-
-	@ManyToMany(mappedBy = "followers")
-	private List<User> following = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(
@@ -76,6 +74,9 @@ public class User extends AbstractEntity implements UserDetails {
 			inverseJoinColumns = @JoinColumn(name = "book_id")
 	)
 	private List<Book> favoriteBooks;
+
+	@Column
+	private Long countFollowers;
 
 	@ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "user_id"))

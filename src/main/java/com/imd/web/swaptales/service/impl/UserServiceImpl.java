@@ -72,4 +72,13 @@ public class UserServiceImpl implements UserService {
     public User findAccountByEmailAndPassword(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password).orElse(null);
     }
+
+    @Override
+    public User followUser(Long idUser, User user) {
+        User userBD = userRepository.findById(idUser).get();
+        userBD.getFollowers().add(user);
+        userBD.setCountFollowers((long) userBD.getFollowers().size());
+        userRepository.save(userBD);
+        return userBD;
+    }
 }
