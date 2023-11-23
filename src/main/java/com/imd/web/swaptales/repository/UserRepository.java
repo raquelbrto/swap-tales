@@ -17,10 +17,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmailAndPassword(String email, String password);
 
-    @Query("SELECT u FROM User u " +
-            "LEFT JOIN FETCH u.followers f " +
-            "LEFT JOIN FETCH u.likedReviews r " +
-            "GROUP BY u " +
-            "ORDER BY COUNT(f) DESC, SUM(r.likesCount) DESC, COUNT(r) DESC")
+
+    @Query("SELECT u FROM User u ORDER BY COUNT(u.countFollowers)")
     List<User> listTopUsers();
+//    @Query("SELECT u FROM User u " +
+//            "LEFT JOIN FETCH u.followers f " +
+//            "LEFT JOIN FETCH u.reviews " +
+//            "GROUP BY u " +
+//            "ORDER BY COUNT(f) DESC, SUM(r.likesCount) DESC, COUNT(r) DESC")
+//    List<User> listTopUsers();
 }
