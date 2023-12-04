@@ -77,9 +77,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User followUser(Long idUser, User user) {
         User userBD = userRepository.findById(idUser).get();
+        User userFollowing = userRepository.findById(user.getId()).get();
+
+        userFollowing.getFollowing().add(userBD);
         userBD.getFollowers().add(user);
         userBD.setCountFollowers((long) userBD.getFollowers().size());
         userRepository.save(userBD);
+        userRepository.save(userFollowing);
+
         return userBD;
     }
 
