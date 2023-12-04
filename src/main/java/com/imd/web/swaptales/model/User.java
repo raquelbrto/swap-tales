@@ -61,6 +61,16 @@ public class User extends AbstractEntity implements UserDetails {
 
 	@ManyToMany
 	@JoinTable(
+			name = "user_following",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "following_id")
+	)
+	@JsonIgnore
+	private List<User> following = new ArrayList<>();
+
+
+	@ManyToMany
+	@JoinTable(
 			name = "user_review_like",
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "review_id")

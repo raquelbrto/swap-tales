@@ -4,6 +4,7 @@ import com.imd.web.swaptales.model.Role;
 import com.imd.web.swaptales.model.User;
 import com.imd.web.swaptales.repository.UserRepository;
 import com.imd.web.swaptales.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -85,11 +86,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User unfollowUser(Long idUser, User user) {
-        User userBD = userRepository.findById(idUser).get();
-        userBD.getFollowers().remove(user);
-        userBD.setCountFollowers((long) userBD.getFollowers().size());
-        userRepository.save(userBD);
-        return userBD;
+        User follower = userRepository.findById(idUser).orElse(null);
+        User following = userRepository.findById(user.getId()).orElse(null);
+
+        if (follower != null && following != null) {
+            follower.getFollowers().remove(following);
+            following.getFollowing().remove(follower);
+            follower.setCountFollowers((long) follower.getFollowers().size());
+
+            userRepository.save(follower);
+            userRepository.save(following);
+
+            return follower;
+        } else {
+            throw new EntityNotFoundException("Follower or Following not found");
+        }
     }
 
     @Override
@@ -99,6 +110,12 @@ public class UserServiceImpl implements UserService {
         return followers;
     }
 
+    @Override
+    public List<User> getAllFollowings(Long idUser) {
+        User userBD = userRepository.findById(idUser).get();
+        List<User> following = userBD.getFollowing();
+        return following;
+    }
     @Override
     public List<User> listTopUsers() {
         return userRepository.listTopUsers();

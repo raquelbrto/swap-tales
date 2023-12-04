@@ -23,5 +23,7 @@ public interface UserService {
     User unfollowUser(Long idUser, User user);
 
     List<User> getAllFollowers(Long idUser);
+
+    List<User> getAllFollowings(Long idUser);
     List<User> listTopUsers();
 }
