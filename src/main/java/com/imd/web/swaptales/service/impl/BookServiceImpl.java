@@ -138,6 +138,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> listTopBooks(){
+
         return bookRepository.listTopBooks();
     }
 
